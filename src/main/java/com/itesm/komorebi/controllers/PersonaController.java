@@ -3,11 +3,12 @@ package com.itesm.komorebi.controllers;
 import com.itesm.komorebi.models.Persona;
 import com.itesm.komorebi.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;import java.util.List;
 
 @RestController
 @RequestMapping("/v1/persona")
 public class PersonaController {
+
     @Autowired
     PersonaService personaService;
 
@@ -29,4 +30,15 @@ public class PersonaController {
         personaService.cumplirAnios(persona);
         return persona;
     }
+
+    @GetMapping("/todos")
+    public List<Persona> getPersonas(){
+        return personaService.getAll();
+    }
+
+    @GetMapping("/get-by-id/{id}")
+    public Persona getById(@PathVariable("id") int id){
+        return personaService.getById(id);
+    }
+
 }
